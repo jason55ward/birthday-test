@@ -9,11 +9,14 @@ fake = Faker.fake()
 def generate_example_data(rows=4, specific_date=''):
     data = []
     for row in range(rows):
-        pass
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        date = specific_date if specific_date else fake.date()
+        data.append([last_name, first_name, date])
     return data
 
 def test_generate_example_data():
-    rows = 100
+    rows = 10
     data = generate_example_data(rows=rows)
     assert len(data) == rows
 
