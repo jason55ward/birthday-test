@@ -1,5 +1,7 @@
 import json
 import os
+from datetime import datetime
+from dateutil import parser
 
 EXAMPLE_JSON_FILE='example.json'
 DEFAULT_JSON=[
@@ -12,8 +14,18 @@ DEFAULT_JSON=[
 
 def get_birthday_list(data, custom_today_date=None):
     result = []
+    today = (datetime.today().date()
+            if not custom_today_date
+            else datetime.strptime(custom_today_date, '%Y/%m/%d'))
     for row in data:
-        print(row)
+        try:
+            if len(row) != 3:
+                print(f'Each row requires 3 elements, found only {len(row)} in {row}')
+                continue
+            input_date = parser.parse(row[2]).date()
+            print(row, input_date.year)
+        except parser.ParserError:
+            print(f'Data row {row} has a datetime we cannot find!')
     return result
 
 def get_data(filename=None):
