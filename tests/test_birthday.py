@@ -3,7 +3,7 @@ import pytest
 import datetime
 from birthday import get_birthday_list
 from faker import Faker
-fake = Faker.fake()
+fake = Faker()
 
 
 def generate_example_data(rows=4, specific_date=''):
