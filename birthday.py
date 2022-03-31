@@ -23,7 +23,11 @@ def get_birthday_list(data, custom_today_date=None):
                 print(f'Each row requires 3 elements, found only {len(row)} in {row}')
                 continue
             input_date = parser.parse(row[2]).date()
-            print(row, input_date.year)
+            #do leapyear birthdays on 28 Feb
+            if input_date.day == 29 and input_date.month == 2 and today.year % 4 != 0:
+                input_date = input_date.replace(day=28)
+            if today.day == input_date.day and today.month == input_date.month:
+                result.append(f'{row[1]} {row[0]}')
         except parser.ParserError:
             print(f'Data row {row} has a datetime we cannot find!')
     return result
