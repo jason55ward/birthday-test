@@ -12,5 +12,5 @@ To run the tests:
 To run with a custom json file:
     python birthday.py -f example.json
 
-To run and generate json data from Faker:
+To run with the default example.json file:
     python birthday.py
